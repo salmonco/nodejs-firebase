@@ -6,10 +6,10 @@ const usersRef = db.collection("user");
 
 /**
  * 회원가입
- * Request Body : { ID: "", Password: "", Nickname: "", Gender: "" }
- * Response Body : {  }
+ * Request Body : { ID, Password, Nickname, Gender }
+ * Response Body : { ID, Password, Nickname, Gender, UserID, Status }
  */
-router.post("/signup", async (req, res, next) => {
+router.post("/signup", async (req, res) => {
   try {
     const user = req.body;
     const addResponse = await usersRef.add(user);
@@ -28,10 +28,10 @@ router.post("/signup", async (req, res, next) => {
 
 /**
  * 로그인
- * Request Body : { ID: "", Password: "" }
- * Response Body : { UserID: "", Nickname: "", Gender: "", Status: true | false }
+ * Request Body : { ID, Password }
+ * Response Body : { UserID, Nickname, Gender, Status }
  */
-router.post("/signin", async (req, res, next) => {
+router.post("/signin", async (req, res) => {
   try {
     const { ID, Password } = req.body;
 
@@ -60,8 +60,8 @@ router.post("/signin", async (req, res, next) => {
 
 /**
  * ID 중복확인
- * Request Body : { ID: "" }
- * Response Body : { Status: true | false }
+ * Request Body : { ID }
+ * Response Body : { Status }
  */
 router.post("/checkDuplicateID", async (req, res) => {
   try {
@@ -82,8 +82,8 @@ router.post("/checkDuplicateID", async (req, res) => {
 
 /**
  * 닉네임 중복확인
- * Request Body : { Nickname: "" }
- * Response Body : { Status: true | false }
+ * Request Body : { Nickname }
+ * Response Body : { Status }
  */
 router.post("/checkDuplicateName", async (req, res) => {
   try {
